@@ -1,0 +1,31 @@
+[package]
+authors = ["Zeyla Hellyer <zeyla@hellyer.dev>"]
+categories = []
+description = "Client library for accessing the Active911 'API'."
+documentation = "https://github.com/zeylahellyer/active911"
+edition = "2018"
+homepage = "https://github.com/zeylahellyer/active911"
+include = ["src/**/*.rs", "Cargo.toml", "LICENSE.md"]
+keywords = []
+license = "ISC"
+name = "active911"
+publish = false
+readme = "README.md"
+repository = "https://github.com/zeylahellyer/active911.git"
+version = "0.1.0"
+
+[dependencies]
+hyper = { default-features = false, features = ["client", "http2"], version = "0.14" }
+hyper-rustls = { default-features = false, features = ["tokio-runtime"], optional = true, version = "0.22" }
+serde_json = { default-features = false, features = ["std"], version = "1" }
+serde = { default-features = false, features = ["derive", "alloc"], version = "1" }
+
+[dev-dependencies]
+static_assertions = { default-features = false, version = "1" }
+tokio = { default-features = false, features = ["macros", "rt"], version = "1"}
+
+[features]
+default = ["http", "rustls-native-certs"]
+http = ["hyper-rustls"]
+rustls-native-certs = ["http", "hyper-rustls/rustls-native-certs"]
+webpki-roots = ["http", "hyper-rustls/webpki-roots"]
