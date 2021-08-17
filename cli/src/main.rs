@@ -29,6 +29,12 @@ fn main() -> Result<(), Box<dyn Error>> {
         handle.write_all(b" - ")?;
         handle.write_all(alarm.pretty_date.as_bytes())?;
         handle.write_all(b"\n  ")?;
+
+        if !alarm.place.is_empty() {
+            handle.write_all(alarm.place.as_bytes())?;
+            handle.write_all(b" ")?;
+        }
+
         handle.write_all(alarm.address.as_bytes())?;
         handle.write_all(b", ")?;
         handle.write_all(alarm.city.as_bytes())?;
